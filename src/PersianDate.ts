@@ -298,9 +298,3 @@ export class PersianDate extends DateTime {
         return 0;
     }
 }
-
-export class ExtDate extends Date {
-    public log() {
-        console.log(this);
-    }
-}

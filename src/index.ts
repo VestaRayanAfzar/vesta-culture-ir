@@ -1,2 +1,2 @@
 export {IR} from "./IR";
-export {PersianDate, ExtDate} from "./PersianDate";
+export {PersianDate} from "./PersianDate";

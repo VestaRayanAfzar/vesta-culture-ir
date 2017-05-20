@@ -12,11 +12,6 @@ let aid = new vesta.TypescriptTarget({
                 delete json.dependencies['@vesta/core'];
                 json.dependencies['@vesta/core-es5'] = version;
             }
-            delete json.devDependencies[''];
-        },
-        tsconfig: (json, target) => {
-            json.compilerOptions.outDir = './';
-            json.exclude = json.exclude = ["node_modules", "**/*.d.ts", "**/*.js"];
         }
     }
 });

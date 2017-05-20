@@ -1,13 +1,12 @@
 {
   "name": "@vesta/culture-ir",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vesta platform libraries",
   "license": "Apache-2.0",
   "main": "build/index.js",
   "typings": "index.d.ts",
   "repository": "https://github.com/VestaRayanAfzar/vesta-cuture-IR.git",
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node build/test --autotest --watch package/ --color --verbose",
     "prepare": "gulp prepare",
     "dev:es5": "gulp dev:es5",
     "dev:es6": "gulp dev:es6",
@@ -25,7 +24,7 @@
     "@vesta/core": "^0.2.3"
   },
   "devDependencies": {
-    "@vesta/devmaid": "^0.1.4",
+    "@vesta/devmaid": "^0.2.0",
     "gulp": "^3.9.1"
   }
 }
