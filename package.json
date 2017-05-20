@@ -1,6 +1,6 @@
 {
   "name": "@vesta/culture-ir",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Vesta platform libraries",
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -24,7 +24,7 @@
     "@vesta/core": "^0.2.3"
   },
   "devDependencies": {
-    "@vesta/devmaid": "^0.2.0",
+    "@vesta/devmaid": "^0.2.2",
     "gulp": "^3.9.1"
   }
 }
