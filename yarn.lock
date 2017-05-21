@@ -19,9 +19,9 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
-"@vesta/core@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@vesta/core/-/core-0.2.3.tgz#893d3b74df22471930f5e3c596e8108885c71acf"
+"@vesta/core@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@vesta/core/-/core-0.2.6.tgz#a005472a3b7ab447d18be0f0d578a29ca3b777bb"
 
 "@vesta/devmaid@^0.2.2":
   version "0.2.2"

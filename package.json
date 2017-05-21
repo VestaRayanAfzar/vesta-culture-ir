@@ -1,6 +1,6 @@
 {
   "name": "@vesta/culture-ir",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vesta platform libraries",
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -21,7 +21,7 @@
     "email": "bishehsary@gmail.com"
   },
   "dependencies": {
-    "@vesta/core": "^0.2.3"
+    "@vesta/core": "^0.2.6"
   },
   "devDependencies": {
     "@vesta/devmaid": "^0.2.2",
