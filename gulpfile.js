@@ -12,6 +12,11 @@ let aid = new vesta.TypescriptTarget({
                 delete json.dependencies['@vesta/core'];
                 json.dependencies['@vesta/core-es5'] = version;
             }
+        },
+        module: (target) => {
+            if (target === 'es5') return {
+                '@vesta/core': '@vesta/core-es5',
+            }
         }
     }
 });
