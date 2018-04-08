@@ -1,24 +1,14 @@
 const vesta = require('@vesta/devmaid');
 
-let aid = new vesta.TypescriptTarget({
-    genIndex: true,
-    targets: ['es5', 'es6'],
+const indexer = new vesta.Indexer("src");
+indexer.generate();
+
+let pkgr = new vesta.Packager({
+    root: __dirname,
+    src: "src",
+    targets: ['es5'],
     files: ['.npmignore', 'LICENSE', 'README.md'],
     publish: '--access=public',
-    transform: {
-        package: (json, target) => {
-            if (target === 'es5') {
-                let version = json.dependencies['@vesta/core'];
-                delete json.dependencies['@vesta/core'];
-                json.dependencies['@vesta/core-es5'] = version;
-            }
-        },
-        module: (target) => {
-            if (target === 'es5') return {
-                '@vesta/core': '@vesta/core-es5',
-            }
-        }
-    }
 });
 
-aid.createTasks();
+pkgr.createTasks();

@@ -1,11 +1,11 @@
-# [Vesta](http://vesta.bz) Culture
+# [Vesta](https://vestarayanafzar.com) Culture
  
 ## Persian Culture
 
-### IR
+### IrLocale
 
 ```javascript
-export const IR = {
+export const IrLocale = {
     code: 'fa-IR',
     lang: 'fa',
     country: 'Iran',
@@ -28,7 +28,7 @@ export const IR = {
 ### PersianDate
 
 ```typescript
-export class PersianDate extends DateTime {
+export class IrDate extends DateTime {
     
 }
 ```
