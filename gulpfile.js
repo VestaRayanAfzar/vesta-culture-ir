@@ -1,14 +1,14 @@
-const vesta = require('@vesta/devmaid');
+const { Indexer, Packager } = require("@vesta/devmaid");
 
-const indexer = new vesta.Indexer("src");
+const indexer = new Indexer("src");
 indexer.generate();
 
-let pkgr = new vesta.Packager({
+let pkgr = new Packager({
     root: __dirname,
     src: "src",
-    targets: ['es5'],
-    files: ['.npmignore', 'LICENSE', 'README.md'],
-    publish: '--access=public',
+    targets: ["es6"],
+    files: [".npmignore", "LICENSE", "README.md"],
+    publish: "--access=public",
 });
 
-pkgr.createTasks();
+module.exports = pkgr.createTasks();

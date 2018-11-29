@@ -1,4 +1,4 @@
-import { DateTime, ILocale } from "@vesta/core-es5";
+import { DateTime, ILocale } from "@vesta/core";
 import { IrLocale } from "./IrLocale";
 
 declare function parseInt(s: string | number, radix?: number): number;
@@ -95,13 +95,13 @@ export class IrDate extends DateTime {
     }
 
     public setHours(hour: number, minute?: number, second?: number): number {
-        minute = isNaN(minute) ? this.gregorianDate.getMinutes() : minute;
-        second = isNaN(second) ? this.gregorianDate.getSeconds() : second;
+        minute = isNaN(minute as number) ? this.gregorianDate.getMinutes() : minute;
+        second = isNaN(second as number) ? this.gregorianDate.getSeconds() : second;
         return this.gregorianDate.setHours(hour, minute, second);
     }
 
     public setMinutes(minute: number, second?: number): number {
-        second = isNaN(second) ? this.gregorianDate.getSeconds() : second;
+        second = isNaN(second as number) ? this.gregorianDate.getSeconds() : second;
         return this.gregorianDate.setMinutes(minute, second);
     }
 

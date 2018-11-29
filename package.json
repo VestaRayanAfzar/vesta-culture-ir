@@ -1,13 +1,13 @@
 {
   "name": "@vesta/culture-ir",
-  "version": "0.2.3",
+  "version": "1.0.1",
   "description": "Vesta platform Persian culture",
   "license": "Apache-2.0",
   "main": "build/index.js",
   "typings": "index.d.ts",
   "repository": "https://github.com/VestaRayanAfzar/vesta-culture-ir.git",
   "scripts": {
-    "dev": "gulp dev[es5]",
+    "start": "gulp",
     "deploy": "gulp publish"
   },
   "author": "hbtb <bishehsary@gmail.com>",
@@ -19,9 +19,10 @@
     "email": "bishehsary@gmail.com"
   },
   "dependencies": {
-    "@vesta/core-es5": "^1.1.7"
+    "@vesta/core": "^2.0.3"
   },
   "devDependencies": {
-    "@vesta/devmaid": "^0.3.3"
+    "@vesta/devmaid": "^0.4.1",
+    "gulp": "^4.0.0"
   }
 }

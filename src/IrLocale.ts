@@ -1,4 +1,4 @@
-import { ILocale } from "@vesta/core-es5";
+import { ILocale } from "@vesta/core";
 
 export const IrLocale: ILocale = {
     code: "fa-IR",
