@@ -1,4 +1,4 @@
-import { ILocale } from "@vesta/locale";
+import { ILocale } from "@vesta/culture";
 
 export const IrLocale: ILocale = {
     code: "fa-IR",

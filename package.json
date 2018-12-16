@@ -1,6 +1,6 @@
 {
   "name": "@vesta/culture-ir",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vesta platform Persian culture",
   "license": "Apache-2.0",
   "main": "build/index.js",
@@ -19,10 +19,10 @@
     "email": "bishehsary@gmail.com"
   },
   "dependencies": {
-    "@vesta/locale": "^0.1.0"
+    "@vesta/culture": "^0.1.0"
   },
   "devDependencies": {
-    "@vesta/devmaid": "^0.4.1",
+    "@vesta/devmaid": "^0.4.5",
     "gulp": "^4.0.0"
   }
 }

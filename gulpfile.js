@@ -1,3 +1,4 @@
+const { series } = require("gulp");
 const { Indexer, Packager } = require("@vesta/devmaid");
 
 const indexer = new Indexer("src");
@@ -11,4 +12,9 @@ let pkgr = new Packager({
     publish: "--access=public",
 });
 
-module.exports = pkgr.createTasks();
+const tasks = pkgr.createTasks();
+
+module.exports = {
+    default: tasks.default,
+    publish: series(tasks.deploy, tasks.publish)
+}

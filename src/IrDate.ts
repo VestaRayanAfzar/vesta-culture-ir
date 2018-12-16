@@ -1,4 +1,4 @@
-import { DateTime, ILocale } from "@vesta/locale";
+import { DateTime, ILocale } from "@vesta/culture";
 import { IrLocale } from "./IrLocale";
 
 declare function parseInt(s: string | number, radix?: number): number;

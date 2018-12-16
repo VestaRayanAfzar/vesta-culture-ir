@@ -1,2 +1,2 @@
-export {IrDate} from "./IrDate";
-export {IrLocale} from "./IrLocale";
+export { IrDate } from "./IrDate";
+export { IrLocale } from "./IrLocale";
