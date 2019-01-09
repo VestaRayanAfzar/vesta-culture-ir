@@ -7,16 +7,16 @@ export class IrDate extends DateTime {
     public locale: ILocale = IrLocale;
     private gregorianDate: Date;
     private gregorianDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    private persianDaysInMonth: Array<number> = IrLocale.daysInMonth;
+    private persianDaysInMonth: number[] = IrLocale.daysInMonth;
 
-    // constructor();
-    // constructor(value:number);
-    // constructor(value:string);
-    // constructor(year:number, month:number, date?:number, hours?:number, minutes?:number, seconds?:number, ms?:number);
-    // constructor(year?:number, month?:number, date?:number, hours?:number, minutes?:number, seconds?:number, ms?:number){}
     constructor() {
         super();
         this.gregorianDate = new Date();
+    }
+
+    public isLeapYear(year?: number) {
+        year = year || this.getFullYear();
+        return ((((((year - ((year > 0) ? 474 : 473)) % 2820) + 474) + 38) * 682) % 2816) < 682;
     }
 
     public getDate(): number {
@@ -37,8 +37,8 @@ export class IrDate extends DateTime {
         const gd = this.gregorianDate.getDate();
         const gm = this.gregorianDate.getMonth();
         const gy = this.gregorianDate.getFullYear();
-        const j = this.toPersian(gy, gm, gd);
-        return j[0];
+        const persian = this.toPersian(gy, gm, gd);
+        return persian[0];
     }
 
     public getHours(): number {
@@ -53,8 +53,8 @@ export class IrDate extends DateTime {
         const gd = this.gregorianDate.getDate();
         const gm = this.gregorianDate.getMonth();
         const gy = this.gregorianDate.getFullYear();
-        const j = this.toPersian(gy, gm, gd);
-        return j[1];
+        const persian = this.toPersian(gy, gm, gd);
+        return persian[1];
     }
 
     public getSeconds(): number {
@@ -77,17 +77,20 @@ export class IrDate extends DateTime {
 
     // 0 <= mount <= 11
     public setFullYear(year: number, month?: number, date?: number) {
-        const persianDate = this.toPersian(this.gregorianDate.getFullYear(), this.gregorianDate.getMonth(), this.gregorianDate.getDate());
+        const gy = this.gregorianDate.getFullYear();
+        const gm = this.gregorianDate.getMonth();
+        const gd = this.gregorianDate.getDate();
+        const persianDate = this.toPersian(gy, gm, gd);
         if (year < 100) { year += 1300; }
         persianDate[0] = year;
-        if (month != undefined) {
+        if (month !== undefined) {
             if (month > 11) {
                 persianDate[0] += Math.floor(month / 12);
                 month = month % 12;
             }
             persianDate[1] = month;
         }
-        if (date != undefined) {
+        if (date !== undefined) {
             persianDate[2] = date;
         }
         const g = this.toGregorian(persianDate[0], persianDate[1], persianDate[2]);
@@ -110,14 +113,18 @@ export class IrDate extends DateTime {
         const gd = this.gregorianDate.getDate();
         const gm = this.gregorianDate.getMonth();
         const gy = this.gregorianDate.getFullYear();
-        const j = this.toPersian(gy, gm, gd);
+        const persian = this.toPersian(gy, gm, gd);
         if (month > 11) {
-            j[0] += Math.floor(month / 12);
+            persian[0] += Math.floor(month / 12);
             month = month % 12;
+        } else if (month < 0) {
+            month *= -1;
+            persian[0] -= Math.ceil(month / 12);
+            month = 12 - (month % 12);
         }
-        j[1] = month;
-        if (date != undefined) { j[2] = date; }
-        const g = this.toGregorian(j[0], j[1], j[2]);
+        persian[1] = month;
+        if (date !== undefined) { persian[2] = date; }
+        const g = this.toGregorian(persian[0], persian[1], persian[2]);
         return this.gregorianDate.setFullYear(g[0], g[1], g[2]);
     }
 
@@ -130,7 +137,7 @@ export class IrDate extends DateTime {
     }
 
     // 0 <= mount <= 11, 1<= day <= 31
-    public toGregorian(year: number, month: number, day: number): Array<number> {
+    public toGregorian(year: number, month: number, day: number): number[] {
         const jy: number = year - 979;
         const jm: number = month;
         const jd: number = day - 1;
@@ -172,8 +179,8 @@ export class IrDate extends DateTime {
             gregorianDayNo = gregorianDayNo % 365;
         }
         let j = 0;
-        for (; gregorianDayNo >= this.gregorianDaysInMonth[j] + (j == 1 && leap ? 1 : 0); j++) {
-            gregorianDayNo -= this.gregorianDaysInMonth[j] + (j == 1 && leap ? 1 : 0);
+        for (; gregorianDayNo >= this.gregorianDaysInMonth[j] + (j === 1 && leap ? 1 : 0); j++) {
+            gregorianDayNo -= this.gregorianDaysInMonth[j] + (j === 1 && leap ? 1 : 0);
         }
         // const gm = j;
         // const gd = gregorianDayNo + 1;
@@ -187,12 +194,13 @@ export class IrDate extends DateTime {
         const gm = month;
         const gd = day - 1;
 
+        // tslint:disable-next-line:max-line-length
         let gregorianDayNo = 365 * gy + parseInt((gy + 3) / 4, 10) - parseInt((gy + 99) / 100, 10) + parseInt((gy + 399) / 400, 10);
 
         for (let i = 0; i < gm; ++i) {
             gregorianDayNo += this.gregorianDaysInMonth[i];
         }
-        if (gm > 1 && ((gy % 4 == 0 && gy % 100 != 0) || (gy % 400 == 0))) {
+        if (gm > 1 && ((gy % 4 === 0 && gy % 100 !== 0) || (gy % 400 === 0))) {
             /* leap and after Feb */
             ++gregorianDayNo;
         }
@@ -237,12 +245,16 @@ export class IrDate extends DateTime {
 
     // 0 <= mount <= 11
     private checkDate(year: number, month: number, day: number): boolean {
-        let dayOffset = 0;
-        if (month == 11 && (year - 979) % 33 % 4) {
-            dayOffset = 1;
+        if (year < 0 || year > 32767) {
+            return false;
         }
-        return !(year < 0 || year > 32767 ||
-            month < 1 || month > 11 ||
-            day < 1 || day > (this.persianDaysInMonth[month - 1] + dayOffset));
+        if (month < 0 || month > 11) {
+            return false;
+        }
+        const dayOffset = this.isLeapYear(year) ? 1 : 0;
+        if (day < 1 || day > this.persianDaysInMonth[month] + dayOffset) {
+            return false;
+        }
+        return true;
     }
 }
